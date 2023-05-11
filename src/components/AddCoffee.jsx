@@ -39,12 +39,13 @@ const AddCoffee = () => {
             icon: 'success',
             confirmButtonText: 'Cool'
           })
+          form.reset()
         }
       });
   };
 
   return (
-    <div className="bg-[#F4F3F0] p-24">
+    <div className="bg-[#F4F3F0] p-28">
       <h1 className="text-3xl font-bold">Add coffee</h1>
       <form onSubmit={handleAddCoffee}>
         {/* form name and quantity row */}
