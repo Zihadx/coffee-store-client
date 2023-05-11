@@ -3,7 +3,7 @@ const CoffeeCard = ({ coffee }) => {
   const { name, quantity, supplier, taste, category, details, photo } = coffee;
   return (
     <div className="">
-      <div className="card card-side bg-base-100 shadow-xl p-3 h-full w-full">
+      <div className="card card-side bg-[#F4F3F0] shadow-xl p-3 h-full w-full">
         <figure>
           <img
             src={photo}
@@ -11,7 +11,7 @@ const CoffeeCard = ({ coffee }) => {
             className="w-[250px] h-[150px] rounded-md p-2"
           />
         </figure>
-        <div className="flex justify-between items-center w-full ps-3">
+        <div className="flex justify-between items-center w-full px-2">
           <div>
             <h2 className="card-title">Name: {name}</h2>
             <p>Quantity: {quantity}</p>
@@ -20,9 +20,9 @@ const CoffeeCard = ({ coffee }) => {
           </div>
           <div className="card-actions justify-end">
             <div className="btn-group btn-group-vertical space-y-3">
-              <button className="btn btn-error">View</button>
-              <button className="btn">Edit</button>
-              <button className="btn btn-error">Delete</button>
+              <button className="btn btn-outline btn-error">View</button>
+              <button className="btn btn-outline">Edit</button>
+              <button className="btn btn-outline btn-error">Delete</button>
             </div>
           </div>
         </div>

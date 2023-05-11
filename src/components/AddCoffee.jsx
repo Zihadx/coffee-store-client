@@ -1,4 +1,5 @@
-import Swal from 'sweetalert2'
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddCoffee = () => {
   const handleAddCoffee = (event) => {
@@ -23,30 +24,36 @@ const AddCoffee = () => {
     console.log(addCoffee);
     //send data to the server
     fetch("http://localhost:5000/coffee", {
-      method:"POST",
-      headers:{
-        "content-type":"application/json"
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
       },
-      body: JSON.stringify(addCoffee)
+      body: JSON.stringify(addCoffee),
     })
       .then((res) => res.json())
-      .then((data) =>   {
+      .then((data) => {
         console.log(data);
-        if(data.insertedId){
+        if (data.insertedId) {
           Swal.fire({
-            title: 'Success!',
-            text: 'User added successfully',
-            icon: 'success',
-            confirmButtonText: 'Cool'
-          })
-          form.reset()
+            title: "Success!",
+            text: "User added successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          form.reset();
         }
       });
   };
 
   return (
-    <div className="bg-[#F4F3F0] p-28">
-      <h1 className="text-3xl font-bold">Add coffee</h1>
+    <>
+    <div className=" bg-[#F4F3F0] md:px-28 p-8 md:pb-28"> 
+      <div className="text-center">
+        <Link to="/" className="font-bold text-amber-700">
+          Home
+        </Link>
+        <h1 className="text-3xl font-bold my-8">Add coffee</h1>
+      </div>
       <form onSubmit={handleAddCoffee}>
         {/* form name and quantity row */}
 
@@ -64,7 +71,7 @@ const AddCoffee = () => {
               />
             </label>
           </div>
-          <div className="form-control md:w-1/2 ml-5">
+          <div className="form-control md:w-1/2 md:ml-5">
             <label className="label">
               <span className="label-text font-bold">Available Quantity</span>
             </label>
@@ -95,7 +102,7 @@ const AddCoffee = () => {
               />
             </label>
           </div>
-          <div className="form-control md:w-1/2 ml-5">
+          <div className="form-control md:w-1/2 md:ml-5">
             <label className="label">
               <span className="label-text font-bold">Taste</span>
             </label>
@@ -126,7 +133,7 @@ const AddCoffee = () => {
               />
             </label>
           </div>
-          <div className="form-control md:w-1/2 ml-5">
+          <div className="form-control md:w-1/2 md:ml-5">
             <label className="label">
               <span className="label-text font-bold">Details</span>
             </label>
@@ -165,6 +172,7 @@ const AddCoffee = () => {
         />
       </form>
     </div>
+    </>
   );
 };
 
