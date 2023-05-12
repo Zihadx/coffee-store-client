@@ -1,6 +1,53 @@
-import { Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const updateCoffee = () => {
+const UpdateCoffee = () => {
+  const coffee = useLoaderData();
+  const { _id, name, quantity,supplier, taste, category,details, photo } = coffee;
+
+  const handleUpdateCoffee = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const quantity = form.quantity.value;
+    const supplier = form.supplier.value;
+    const taste = form.taste.value;
+    const category = form.category.value;
+    const details = form.details.value;
+    const photo = form.photo.value;
+    const updatedCoffee = {
+      name,
+      quantity,
+      supplier,
+      taste,
+      category,
+      details,
+      photo,
+    };
+    console.log(updatedCoffee);
+    //send data to the server
+    fetch(`http://localhost:5000/coffee/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Coffee Updated successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          form.reset();
+        }
+      });
+  };
   return (
     <>
       <div className=" bg-[#F4F3F0] md:px-28 p-8 md:pb-28">
@@ -8,9 +55,9 @@ const updateCoffee = () => {
           <Link to="/" className="font-bold text-amber-700">
             Home
           </Link>
-          <h1 className="text-3xl font-bold my-8">Update coffee</h1>
+          <h1 className="text-3xl font-bold my-8">Update coffee: {name}</h1>
         </div>
-        <form>
+        <form onSubmit={handleUpdateCoffee}>
           {/* form name and quantity row */}
 
           <div className="md:flex mb-4">
@@ -23,6 +70,7 @@ const updateCoffee = () => {
                   type="text"
                   name="name"
                   placeholder="Enter coffee name"
+                  defaultValue={name}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -36,6 +84,7 @@ const updateCoffee = () => {
                   type="text"
                   name="quantity"
                   placeholder="quantity"
+                  defaultValue={quantity}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -54,6 +103,7 @@ const updateCoffee = () => {
                   type="text"
                   name="supplier"
                   placeholder="supplier"
+                  defaultValue={supplier}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -67,6 +117,7 @@ const updateCoffee = () => {
                   type="text"
                   name="taste"
                   placeholder="taste"
+                  defaultValue={taste}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -85,6 +136,7 @@ const updateCoffee = () => {
                   type="text"
                   name="category"
                   placeholder="category"
+                  defaultValue={category}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -98,6 +150,7 @@ const updateCoffee = () => {
                   type="text"
                   name="details"
                   placeholder="details"
+                  defaultValue={details}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -116,6 +169,7 @@ const updateCoffee = () => {
                   type="text"
                   name="photo"
                   placeholder="input your coffee photo"
+                  defaultValue={photo}
                   className="input input-bordered w-full"
                 />
               </label>
@@ -132,4 +186,4 @@ const updateCoffee = () => {
   );
 };
 
-export default updateCoffee;
+export default UpdateCoffee;

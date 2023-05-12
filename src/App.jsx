@@ -10,7 +10,7 @@ function App() {
         <Link to="/addCoffee" className="font-bold text-amber-700 mx-4">
           Add coffee
         </Link>
-        <Link to="/updateCoffee" className="font-bold text-amber-700 mx-4">
+        <Link to='/updateCoffee' className="font-bold text-amber-700 mx-4">
           Update coffee
         </Link>
       </nav>
@@ -19,7 +19,7 @@ function App() {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
         {coffees.map((coffee) => (
-          <CoffeeCard key={coffee} coffee={coffee}></CoffeeCard>
+          <CoffeeCard key={coffee._id} coffee={coffee}></CoffeeCard>
         ))}
       </div>
     </div>

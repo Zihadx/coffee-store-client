@@ -1,6 +1,42 @@
+/* eslint-disable react/prop-types */
+
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const CoffeeCard = ({ coffee }) => {
   // const { name, quantity, supplier, taste, category, details, photo } = coffee;
-  const { name, quantity, supplier, taste, category, details, photo } = coffee;
+  const { _id, name, quantity, taste, category, photo } = coffee;
+  const handleDelete = (_id) => {
+    console.log(_id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log("delete confirm");
+        fetch(`http://localhost:5000/coffee/${_id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deleteCount > 0) {
+              Swal.fire("Deleted!", "Your Coffee has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
   return (
     <div className="">
       <div className="card card-side bg-[#F4F3F0] shadow-xl p-3 h-full w-full">
@@ -21,8 +57,16 @@ const CoffeeCard = ({ coffee }) => {
           <div className="card-actions justify-end">
             <div className="btn-group btn-group-vertical space-y-3">
               <button className="btn btn-outline btn-error">View</button>
-              <button className="btn btn-outline">Edit</button>
-              <button className="btn btn-outline btn-error">Delete</button>
+
+              <Link to={`updateCoffee/${_id}`}>
+                <button className="btn btn-outline w-full">Edit</button>
+              </Link>
+              <button
+                className="btn btn-outline btn-error"
+                onClick={() => handleDelete(_id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
