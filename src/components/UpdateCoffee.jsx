@@ -4,7 +4,8 @@ import Swal from "sweetalert2";
 
 const UpdateCoffee = () => {
   const coffee = useLoaderData();
-  const { _id, name, quantity,supplier, taste, category,details, photo } = coffee;
+  const { _id, name, quantity, supplier, taste, category, details, photo } =
+    coffee;
 
   const handleUpdateCoffee = (event) => {
     event.preventDefault();
@@ -37,7 +38,7 @@ const UpdateCoffee = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount>0) {
           Swal.fire({
             title: "Success!",
             text: "Coffee Updated successfully",
@@ -180,6 +181,13 @@ const UpdateCoffee = () => {
             value="Update coffee"
             className="btn btn-block bg-amber-700 mt-4"
           />
+          {/* <Link to="/">
+            <input
+              type="submit"
+              value="Update coffee"
+              className="btn btn-block bg-amber-700 mt-4"
+            />
+          </Link> */}
         </form>
       </div>
     </>
